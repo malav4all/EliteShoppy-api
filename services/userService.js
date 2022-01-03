@@ -1,7 +1,11 @@
 const UserModel = require("../db/models/UserModel");
 const userSerives = {
-    addUser(UserObject){
-        const promise = UserModel.create(UserObject);
+   async addUser(UserObject){
+        const promise = await UserModel.create(UserObject);
+        return promise
+    },
+    async login(email){
+        const promise = await UserModel.findOne({email})
         return promise
     }
 }

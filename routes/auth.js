@@ -2,6 +2,6 @@ const express = require("express")
 const userAuth = require("../controller/userAuth")
 const Routes = express.Router()
 Routes.post("/aut/register",userAuth.register)
-Routes.get("/auth/login",userAuth.login)
+Routes.post("/auth/login",userAuth.loginUser)
 
 module.exports = Routes
