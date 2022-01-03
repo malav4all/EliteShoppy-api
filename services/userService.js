@@ -7,6 +7,9 @@ const userSerives = {
     async login(email){
         const promise = await UserModel.findOne({email})
         return promise
+    },
+    updateUser(){
+
     }
 }
 
