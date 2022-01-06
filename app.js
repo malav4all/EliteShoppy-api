@@ -8,7 +8,7 @@ app.use(cors())
 app.use(express.json())
 
 //Routes
-app.use("/",require("./routes/userroutes"))
+app.use("/user",require("./routes/userroutes"))
 app.use("/",require("./routes/auth"))
 const server = app.listen(process.env.PORT,()=>{
     console.log("Backend Up",server.address().port)

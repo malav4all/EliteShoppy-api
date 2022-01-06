@@ -31,7 +31,7 @@ const userAuth = {
                     const {password,...others} = data._doc
                     const accessToken = token.createToken({
                         id:data._id,
-                        email:data.email
+                        email:data.isAdmin
                     })
                     res.status(200).json({...others,accessToken})
                 }
