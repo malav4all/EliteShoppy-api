@@ -14,7 +14,8 @@
      password:{type:Schema.Types.String,required:true,min:8,max:200},
      phone:{type:Schema.Types.String,required:true},
      email:{type:Schema.Types.String,required:true},
-     logintime:{type:Schema.Types.Date,default:new Date()},
+     logintime:{type:Schema.Types.Date,default:new Date().toString()},
+     isAdmin:{type:Schema.Types.Boolean,default:false}
  },{timestamps:true});
  
  const UserModel = connection.model('users',UserSchema);

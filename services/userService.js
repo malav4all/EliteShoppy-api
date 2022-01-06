@@ -8,8 +8,23 @@ const userSerives = {
         const promise = await UserModel.findOne({email})
         return promise
     },
-    updateUser(){
-
+    async updateUser(id,data,password){
+        console.log("User Service Id",id)
+        const promise = await UserModel.findByIdAndUpdate(id,data,{new:true})
+        return promise
+    },
+    getAllUsers(){
+        const promise = new Promise((resolve,reject)=>{
+             UserModel.find({},(err,doc)=>{
+                if(err){
+                    reject('Error',err.message)
+                }
+                else{
+                    resolve(doc);
+                }
+            })
+        })
+        return promise
     }
 }
 
