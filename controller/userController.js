@@ -14,9 +14,40 @@ const userController = {
             console.log(err.message)
         })
     },
+    // Delete User
+    deleteUser(req,res){
+        let id = req.params.id
+        const promise = UserService.delete(id)
+        promise
+        .then((data)=>{
+            console.log(data)
+            res.status(200).json({
+                message : "Delete Successfully"
+            })
+        })
+        .catch((err)=>{
+            console.log(err.message)
+        })
+    },
+    // Get User By id
+    getUserByIds(req,res){
+        let id = req.params.id
+        const promise = UserService.getUserById(id)
+        promise
+        .then((data)=>{
+            console.log(data)
+            const {password,...others} = data._doc
+            res.status(200).json(others)
+        })
+        .catch((err)=>{
+            console.log(err.message)
+        })
+    },
     // fetch All Users
     fetchAllUser(req,res){
-        const promise = UserService.getAllUsers();
+        const query = req.query.new
+        console.log(query)
+        const promise = UserService.getAllUsers(query);
         promise.then((data)=>{
             res.send(data)
             console.log(data)

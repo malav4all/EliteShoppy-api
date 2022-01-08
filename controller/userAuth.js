@@ -10,9 +10,9 @@ const userAuth = {
         const promise = userOperations.addUser(user)
         promise
         .then(data =>{
-            console.log("Data",data)
             res.status(201).json({
-                message : "Registration Successfully"
+                message : "Registration Successfully",
+                data:data
             })
         })
         .catch((err)=>{
@@ -31,7 +31,7 @@ const userAuth = {
                     const {password,...others} = data._doc
                     const accessToken = token.createToken({
                         id:data._id,
-                        email:data.isAdmin
+                        isAdmin:data.isAdmin
                     })
                     res.status(200).json({...others,accessToken})
                 }

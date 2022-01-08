@@ -16,16 +16,27 @@ const verifyToken = (req,res,next) =>{
 }
 
 const verifyTokenAndAuthoreization = (req,res,next) =>{
+    let id = req.params.id
+    console.log("param id",id)
     verifyToken(req,res,()=>{
-        let id = req.user.id
-        console.log("user id",id)
-        let paramasId = req.params.id
-        console.log("parmaas id",paramasId)
-        if(id){
+        if(id || req.user.isAdmin){
             next()
         }else{
             res.status(403).json("Your are not allowed to do that !")
         }
     })
 }
-module.exports = {verifyToken,verifyTokenAndAuthoreization}
+
+const verifyTokenAndAdmin = (req,res,next) =>{
+    verifyToken(req,res,()=>{
+        let admin = req.params.id
+        let id = req.user.id
+        console.log("isAdmin Status",id)
+        if(admin){
+            next()
+        }else{
+            res.status(403).json("Your are not allowed to do that !")
+        }
+    })
+}
+module.exports = {verifyToken,verifyTokenAndAuthoreization,verifyTokenAndAdmin}

@@ -9,21 +9,19 @@ const userSerives = {
         return promise
     },
     async updateUser(id,data){
-        console.log("User Service Id",id)
         const promise = await UserModel.findByIdAndUpdate(id,data,{new:true})
         return promise
     },
-    getAllUsers(){
-        const promise = new Promise((resolve,reject)=>{
-             UserModel.find({},(err,doc)=>{
-                if(err){
-                    reject('Error',err.message)
-                }
-                else{
-                    resolve(doc);
-                }
-            })
-        })
+    async getAllUsers(query){
+        const promise = query ? await UserModel.find().sort({_id:-1}).limit(5): await UserModel.find()
+        return promise
+    },
+    async delete(id){
+        const promise = UserModel.findByIdAndDelete(id);
+        return promise
+    },
+    async getUserById(id){
+        const promise = await UserModel.findById(id)
         return promise
     }
 }
