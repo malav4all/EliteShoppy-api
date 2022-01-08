@@ -1,15 +1,15 @@
 const UserService = require("../services/userService")
-const bcrypt = require("../utils/encrypt")
 const userController = {
     //User Update By Verify Token
     updateUser(req,res){
-        let pass = bcrypt.doEncrypt(req.body.password)
         let id  = req.params.id
         let userData = req.body
-        const promise = UserService.updateUser(id,userData,pass)
+        const promise = UserService.updateUser(id,userData)
         promise.then((data)=>{
             console.log(data)
-            res.send(data)
+            res.status(201).json({
+                message : "Update Successfully"
+            })
         }).catch((err)=>{
             console.log(err.message)
         })
