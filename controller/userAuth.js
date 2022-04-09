@@ -16,11 +16,12 @@ const userAuth = {
             })
         })
         .catch((err)=>{
-            res.status(500).json(err)
+            res.status(500).json(err.message)
         })
     },
     //User Login With JWT and Encrypt Password
     loginUser(req,res){
+        // console.log({req})
         let email  = req.body.email
         let password = req.body.password
         const promise = userOperations.login(email)
